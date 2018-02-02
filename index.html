@@ -94,19 +94,16 @@
 
         //logic portion
         if (userGuess === computerLetter) {
-            totalWin++
-            guessesLeft = 9
-
-            alert("You win! The letter was " + computerLetter)
             document.getElementById("HTML").innerHTML = updatedScore
-            reinitializeGame(guessArray)
+            totalWin++
+            alert("You win! The letter was " + computerLetter)
+            reinitializeGame(guessArray)    
         }
 
         else if (guessesLeft <= 0) {
-            totalLoss++
-            guessesLeft = 9
-            alert("You lost! The letter was " + computerLetter)
             document.getElementById("HTML").innerHTML = updatedScore
+            totalLoss++
+            alert("You lost! The letter was " + computerLetter)
             reinitializeGame(guessArray)
         }
 
