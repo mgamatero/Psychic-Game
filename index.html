@@ -12,30 +12,24 @@
         crossorigin="anonymous">
     <!--reset file and css  -->
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
 </head>
 
 <body>
 
-
-
-
-    <!-- This is the text we will see on the screen *****************-->
-    <!-- Initial HTML Output -->
-    <div id="HTML">
-        <h1>Psychic Game</h1>
-        <br>
-        <h3>Guess what letter I'm thinking of</h3>
-        <br>
-        <h3>Wins: 0</h3>
-        <br>
-        <h3>Losses: 0</h3>
-        <br>
-        <h3>Guesses Left: 9</h3>
-        <br>
-        <h3>Your Guesses so far: </h3>
+    <div class="jumbotron">
+        <class class="container">
+            <h1 class="display-4">Psychic Game</h1>
+            <p class="lead">Guess what letter I'm thinking of</p>
+            <hr class="my-4">
+            <p>**Pick letters only please**</p>
+            <p class="lead" id="HTML">
+                <!-- This section will contain the Wins, Losses, Guesses Left, Guesses so far.  id="HTML" 
+                referenced in Javascript -->
+            </p>
+        </class>
     </div>
-    <!-- ********************************************************* -->
+
 </body>
 
 <script>    
@@ -57,64 +51,52 @@
         computerLetter = letterAlphabet[Math.floor(Math.random() * letterAlphabet.length)]
     }
     // ***********************************************************
-   
 
-    // computer's letter is the value we are trying to guess
+
+    // computer's lettr is the value we are trying to guess
     computerLetter = letterAlphabet[Math.floor(Math.random() * letterAlphabet.length)]
 
     //this gets user's keyboard input
     document.onkeyup = function (event) {
-
         userGuess = event.key
         userGuess = userGuess.toLowerCase() //set to lowercase
-        guessArray.push(userGuess)
-        guessesLeft--
 
-        // if letterAlphabet.includes("y")
-        // {   alert("yes")}
-        // else{
-        //     alert("Please pick letters only!")
-        // }
+        if (letterAlphabet.includes(userGuess)) {   //if userGuess is valid
+            guessArray.push(userGuess)
+            guessesLeft--
 
-        // Updated HTML output - Basically rewriting the HTML
-        var updatedScore = "<h1>Psychic Game</h1>" + "<br>" +
-            "<h3>Guess what letter I'm thinking of</h3>" +
-            "<br>" +
-            "<h3>Wins: " + totalWin + "</h3>" +
-            "<br>" +
-            "<h3>Losses: " + totalLoss + "</h3>" +
-            "<br>" +
-            "<h3>Guesses Left: " + guessesLeft + "</h3>" +
-            "<br>" +
-            "<h3>Your Guesses so far: " + guessArray + "</h3>"
+            // HTML output 
+            var updatedScore = "<h3>Wins: " + totalWin + "</h3>" +
+                "<br>" +
+                "<h3>Losses: " + totalLoss + "</h3>" +
+                "<br>" +
+                "<h3>Guesses Left: " + guessesLeft + "</h3>" +
+                "<br>" +
+                "<h3>Your Guesses so far: " + guessArray + "</h3>"
 
-        document.getElementById("HTML").innerHTML = updatedScore
-
-
-
-        //logic portion
-        if (userGuess === computerLetter) {
             document.getElementById("HTML").innerHTML = updatedScore
-            totalWin++
-            alert("You win! The letter was " + computerLetter)
-            reinitializeGame(guessArray)    
+
+
+            //logic portion
+            if (userGuess === computerLetter) {
+                guessArray.push(userGuess)
+                totalWin++
+                document.getElementById("HTML").innerHTML = updatedScore + "<br><H1>WINNER!!! Letter =" + computerLetter + "</H1>"
+                reinitializeGame(guessArray)
+            }
+
+            else if (guessesLeft <= 0) {
+                guessArray.push(userGuess)
+                totalLoss++
+                document.getElementById("HTML").innerHTML = updatedScore + "<br><H1>LOSER!!! Letter =" + computerLetter + "</H1>"
+                reinitializeGame(guessArray)
+            }
         }
 
-        else if (guessesLeft <= 0) {
-            document.getElementById("HTML").innerHTML = updatedScore
-            totalLoss++
-            alert("You lost! The letter was " + computerLetter)
-            reinitializeGame(guessArray)
+        else {
+            alert("Please pick letters only!")
         }
-
-
-
-
-
     }
-
-
-
 
 </script>
 
