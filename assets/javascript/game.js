@@ -1,5 +1,5 @@
   
-    alert('connected')
+  
     
     /*Variables************************************************ */
     var totalWin = 0
